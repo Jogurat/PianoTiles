@@ -7,7 +7,7 @@
 #include <utility>
 #include <regex>
 
-
+//komentar za testiranje git-a
 std::map<std::string, std::pair<std::string, int>> createInputMap(std::string filePath);
 int commonDiv(int a, int b);
 
