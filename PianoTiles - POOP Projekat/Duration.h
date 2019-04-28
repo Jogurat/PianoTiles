@@ -7,6 +7,7 @@ private:
 	int _numerator; //brojilac
 	int _denumerator; //imenilac
 public:
+	Duration();
 	Duration(int num, int denum): _numerator(num), _denumerator(denum) {}
 	~Duration();
 

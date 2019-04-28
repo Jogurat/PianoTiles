@@ -1,6 +1,10 @@
 #include "Duration.h"
 #include "helperfuns.h"
 
+Duration::Duration()
+{
+}
+
 Duration::~Duration()
 {
 }
@@ -33,7 +37,7 @@ Duration operator-(Duration d1, Duration d2)
 bool operator>(Duration d1, Duration d2)
 {
 	Duration d3 = d1 - d2;
-	if (d3._numerator < 0)
+	if (d3._numerator <= 0)
 		return false;
 	else
 		return true;
