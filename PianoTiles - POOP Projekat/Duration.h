@@ -1,0 +1,20 @@
+#ifndef __DURATION_H__
+#define __DURATION_H__
+
+class Duration
+{
+private:
+	int _numerator; //brojilac
+	int _denumerator; //imenilac
+public:
+	Duration(int num, int denum): _numerator(num), _denumerator(denum) {}
+	~Duration();
+
+	friend Duration operator+(Duration d1, Duration d2);
+	friend Duration operator-(Duration d1, Duration d2);
+	friend bool operator>(Duration d1, Duration d2);
+	friend bool operator==(Duration d1, Duration d2);
+	friend bool operator<(Duration d1, Duration d2);
+};
+
+#endif
