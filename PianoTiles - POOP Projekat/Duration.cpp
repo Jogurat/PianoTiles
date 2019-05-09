@@ -5,8 +5,24 @@ Duration::Duration()
 {
 }
 
+Duration::Duration(const Duration & d)
+{
+	_numerator = d._numerator;
+	_denumerator = d._denumerator;
+}
+
 Duration::~Duration()
 {
+}
+
+int Duration::getNum()
+{
+	return _numerator;
+}
+
+int Duration::getDenum()
+{
+	return _denumerator;
 }
 
 Duration operator+(Duration d1, Duration d2)
@@ -16,8 +32,8 @@ Duration operator+(Duration d1, Duration d2)
 	denumerator = d1._denumerator * d2._denumerator;
 	gcd = commonDiv(numerator, denumerator); //nzd
 	//svodjenje razlomka
-	numerator /= gcd;
-	denumerator /= gcd;
+	/*numerator /= gcd;
+	denumerator /= gcd;*/
 	return Duration(numerator, denumerator);
 }
 
@@ -28,8 +44,8 @@ Duration operator-(Duration d1, Duration d2)
 	denumerator = d1._denumerator * d2._denumerator;
 	gcd = commonDiv(numerator, denumerator); //nzd
 	//svodjenje razlomka
-	numerator /= gcd;
-	denumerator /= gcd;
+	/*numerator /= gcd;
+	denumerator /= gcd;*/
 
 	return Duration(numerator, denumerator);
 }

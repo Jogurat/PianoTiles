@@ -4,11 +4,27 @@
 
 class MusicSymbol
 {
+private:
+	static int ID;
 protected:
-	Duration duration;
+	Duration _duration;
+	int _id;
+	bool _isSplit = false;
+	virtual void print(std::ostream &os)const = 0;
 public:
-	MusicSymbol();
-	~MusicSymbol();
+	MusicSymbol(Duration d) : _duration(d), _id(++ID) {};
+	MusicSymbol(Duration d, int id) : _duration(d), _id(id) {};
+	virtual ~MusicSymbol() = 0;
+	Duration getDuration() const;
+	void split();
+	int getId() const;
+	friend std::ostream& operator<<(std::ostream &os, MusicSymbol *ms);
+	virtual int getMidi()const = 0;
+	virtual bool isNote()const = 0;
+	virtual void editNote() {};
+	virtual void changeOctave(int i) {};
+	virtual std::string getName()const = 0;
+
 };
 
 #endif
