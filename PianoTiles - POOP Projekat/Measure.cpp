@@ -14,22 +14,30 @@ void Measure::addSymbol(MusicSymbol *s)
 void Measure::goThrough()
 {
 	auto iter = _symbols.begin();
-	while (iter != _symbols.end()) {
-		//
+	std::list<MusicSymbol*>::iterator prevIter = iter;
+	while (prevIter != _symbols.end()) {
+		if (iter == _symbols.begin()) {
+			prevIter = iter;
+		}
+		else {
+			prevIter = std::prev(iter);
+		}
+		
 		char c = '\0';
 		if (_kbhit() != 0) {
 			c = _getch();
 		}
 		
 		if (c == 'd') {
-			std::cout << *iter;
 			iter++;
+			std::cout << *std::prev(iter);
 			std::cout << " ";
-		}
-			
+		}		
 		else if (c == 's') {
-			(*iter)->editNote();
-			iter++;
+			(*prevIter)->editNote();
+			if (iter == _symbols.end()) //krajnji slucaj
+				return;
+			//iter++;
 			//std::cout << *iter;
 		}
 	}
