@@ -29,9 +29,12 @@ void Measure::goThrough()
 		}
 		
 		if (c == 'd') {
-			iter++;
-			std::cout << *std::prev(iter);
-			std::cout << " ";
+			if (iter != _symbols.end()) {
+				iter++;
+				std::cout << *std::prev(iter);
+				std::cout << " ";
+			}
+			
 		}		
 		else if (c == 's') {
 			(*prevIter)->editNote();
@@ -46,4 +49,16 @@ void Measure::goThrough()
 MusicSymbol & Measure::peekFirst() const
 {
 	return *_symbols.front();
+}
+
+std::ostream & operator<<(std::ostream & os, Measure & m)
+{
+	auto iter = m._symbols.begin();
+	while (iter != m._symbols.end()) {
+		os << *iter << " ";
+		iter++;
+	}
+	os << std::endl;
+	//os << *iter;
+	return os;
 }
