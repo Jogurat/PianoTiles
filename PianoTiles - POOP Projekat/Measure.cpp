@@ -46,6 +46,11 @@ void Measure::goThrough()
 	}
 }
 
+bool Measure::isFull()
+{
+	return _currDuration == _maxDuration;
+}
+
 MusicSymbol & Measure::peekFirst() const
 {
 	return *_symbols.front();

@@ -18,6 +18,7 @@ public:
 	int getMidi()const override;
 	bool isNote() const override;
 	void editNote() override;
+	int getOctave() const override;
 	void changeOctave(int i) override;
 	std::string getName()const override;
 };

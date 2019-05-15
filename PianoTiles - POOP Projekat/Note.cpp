@@ -47,6 +47,11 @@ void Note::editNote()
 	std::cout << "Menjam notu !" << _name << std::endl;
 }
 
+int Note::getOctave() const
+{
+	return _octave;
+}
+
 void Note::changeOctave(int i)
 {
 	return;

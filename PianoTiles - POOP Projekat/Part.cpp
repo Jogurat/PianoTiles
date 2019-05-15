@@ -6,9 +6,26 @@ Part::Part()
 {
 }
 
+Part::Part(Duration d)
+{
+	_duration = d;
+}
+
 
 Part::~Part()
 {
+}
+
+void Part::setDuration(Duration d)
+{
+	_duration = d;
+}
+
+void Part::addSymbol(MusicSymbol * m)
+{
+	if (_measureList.size() == 0 || _measureList.back()->isFull())
+		_measureList.push_back(new Measure(_duration));
+	_measureList.back()->addSymbol(m);
 }
 
 void Part::addMeasure(Measure & m)

@@ -39,6 +39,9 @@
     <ClCompile Include="Part.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Composition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="helperfuns.h">
@@ -60,6 +63,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Part.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Composition.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

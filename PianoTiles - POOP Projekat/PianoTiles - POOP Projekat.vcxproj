@@ -115,6 +115,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Composition.cpp" />
     <ClCompile Include="Duration.cpp" />
     <ClCompile Include="helperfuns.cpp" />
     <ClCompile Include="main.cpp" />
@@ -125,6 +126,7 @@
     <ClCompile Include="Pause.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Composition.h" />
     <ClInclude Include="Duration.h" />
     <ClInclude Include="helperfuns.h" />
     <ClInclude Include="Measure.h" />

@@ -16,6 +16,7 @@ public:
 	MusicSymbol& peekFirst()const;
 	void addSymbol(MusicSymbol *s);
 	void goThrough();
+	bool isFull();
 	friend std::ostream& operator<<(std::ostream &os, Measure &m);
 };
 #endif
