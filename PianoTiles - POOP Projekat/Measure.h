@@ -11,7 +11,10 @@ private:
 	Duration _maxDuration;
 	Duration _currDuration;
 public:
-	Measure(Duration d) : _maxDuration(d) {};
+	Measure(Duration d) : _maxDuration(d) {
+		_currDuration = *(new Duration(0, 1));
+	
+	};
 	~Measure();
 	MusicSymbol& peekFirst()const;
 	void addSymbol(MusicSymbol *s);
