@@ -41,39 +41,94 @@ void Composition::readInputFile(std::string input)
 	std::string line, brackets, noBrackets;
 
 	while (getline(inputFile, line)) {
-		std::sregex_iterator begin(line.begin(), line.end(), lineRx);
-		std::sregex_iterator empty;
-		if (begin == empty) {
+		std::sregex_iterator rxIter(line.begin(), line.end(), lineRx), empty;
+		if (rxIter == empty) {
 			parseNoBrackets(noBracketsRx, line);
 		}
-		while (begin != empty) {
-			std::smatch result = *begin;
+		while (rxIter != empty) {
+			std::smatch result = *rxIter;
 			noBrackets = result.str(1);
 			//van zagrada
-			parseNoBrackets(noBracketsRx, line);
+			parseNoBrackets(noBracketsRx, noBrackets);
 			brackets = result.str(2);
-			parseBrackets(bracketsRx, line);
 			//u zagradama
-			begin++;
+			parseBrackets(bracketsRx, brackets);
+			rxIter++;
 		}
 	}
 }
 
 void Composition::parseBrackets(std::regex rx, std::string lineToParse)
 {
+	std::sregex_iterator rxIter(lineToParse.begin(), lineToParse.end(), rx), empty;
+	std::string symbols;
+
+	Duration eight(1, 8);
+	Duration quarter(1, 4);
+
+	while (rxIter != empty) {
+		std::smatch result = *rxIter;
+		symbols = result.str(1);
+		if (symbols.size() == 1) {
+			char c = symbols[0];
+			if (c != '|') {
+				Note *n = new Note(eight, (*noteMap)[c].first, (*noteMap)[c].second);
+				addSymbol(n);
+			}
+				
+		}
+		else { 	
+			bool insertLeft = false;
+			bool insertRight = false;
+			int sameId = 0;
+			int timesAdded = 0;
+			Note *n = nullptr;
+
+			for (char c : symbols) {
+				if (sameId == 0) { 
+					Note *temp = new Note(quarter, (*noteMap)[c].first, (*noteMap)[c].second);
+					n = temp;
+					sameId = n->getId();
+					timesAdded++;
+				}
+				else {
+					Note *temp2 = new Note(quarter, (*noteMap)[c].first, (*noteMap)[c].second, sameId);
+					n = temp2;
+					timesAdded++;
+				}
+				
+				if (n->getOctave() < 4) {
+					addSymbolLeft(n);
+				}
+				else {
+					addSymbolRight(n);
+				}
+									
+			}
+			if (!insertLeft) {
+				Pause* pause = new Pause(quarter, sameId);
+				addSymbolLeft(pause);
+			}
+			else if (!insertRight) {
+				Pause* pause = new Pause(quarter, sameId);
+				addSymbolRight(pause);
+			}
+			
+		}
+		rxIter++;
+	}
 }
 
 void Composition::parseNoBrackets(std::regex rx, std::string lineToParse)
 {
-	std::sregex_iterator begin(lineToParse.begin(), lineToParse.end(), rx);
-	std::sregex_iterator empty;
+	std::sregex_iterator rxIter(lineToParse.begin(), lineToParse.end(), rx), empty;
 	std::string symbols;
 	Duration eight(1, 8);
 	Duration quarter(1, 4);
 	std::string spaceBefore, spaceAfter;
 
-	while (begin != empty) {
-		std::smatch result = *begin;
+	while (rxIter != empty) {
+		std::smatch result = *rxIter;
 		spaceBefore = result.str(1);
 		symbols = result.str(2);
 		spaceAfter = result.str(3);
@@ -87,8 +142,8 @@ void Composition::parseNoBrackets(std::regex rx, std::string lineToParse)
 				addBothHands(new Pause(quarter));
 			}
 			else {
-				Note n(quarter, (*noteMap)[c].first, (*noteMap)[c].second);
-				addSymbol(&n);
+				Note *n = new Note(quarter, (*noteMap)[c].first, (*noteMap)[c].second);
+				addSymbol(n);
 			}
 				
 		}
@@ -97,20 +152,20 @@ void Composition::parseNoBrackets(std::regex rx, std::string lineToParse)
 			addBothHands(new Pause(eight));
 		}
 
-		begin++;
+		rxIter++;
 	}
 }
 
 void Composition::addSymbol(MusicSymbol *m)
 {
-	Pause p(m->getDuration());
+	Pause *p = new Pause((m->getDuration()));
 	if (m->getOctave() < 4) {
 		addSymbolLeft(m);
-		addSymbolRight(&p);
+		addSymbolRight(p);
 	}
 	else {
 		addSymbolRight(m);
-		addSymbolLeft(&p);
+		addSymbolLeft(p);
 	}
 }
 
@@ -118,5 +173,15 @@ void Composition::addBothHands(MusicSymbol * m)
 {
 	_partLeft.addSymbol(m);
 	_partRight.addSymbol(m);
+}
+
+Part & Composition::getLeftPart()
+{
+	return _partLeft;
+}
+
+Part & Composition::getRightPart()
+{
+	return _partRight;
 }
 

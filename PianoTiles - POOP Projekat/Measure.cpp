@@ -5,10 +5,25 @@ Measure::~Measure()
 {
 }
 
+Duration Measure::getMaxDuration()
+{
+	return _maxDuration;
+}
+
+Duration Measure::getCurrDuration()
+{
+	return _currDuration;
+}
+
 void Measure::addSymbol(MusicSymbol *s)
 {
 	_symbols.push_back(s);
 	_currDuration = _currDuration + s->getDuration();
+}
+
+void Measure::addSymbolNoDuration(MusicSymbol * s)
+{
+	_symbols.push_back(s);
 }
 
 void Measure::goThrough()
@@ -49,6 +64,16 @@ void Measure::goThrough()
 bool Measure::isFull()
 {
 	return _currDuration == _maxDuration;
+}
+
+std::list<MusicSymbol*>::iterator Measure::begin()
+{
+	return _symbols.begin();
+}
+
+std::list<MusicSymbol*>::iterator Measure::end()
+{
+	return _symbols.end();
 }
 
 MusicSymbol & Measure::peekFirst() const

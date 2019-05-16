@@ -18,6 +18,7 @@ public:
 	friend Duration operator-(Duration d1, Duration d2);
 	friend bool operator>(Duration d1, Duration d2);
 	friend bool operator==(Duration d1, Duration d2);
+	friend bool operator!=(Duration d1, Duration d2);
 	friend bool operator<(Duration d1, Duration d2);
 };
 

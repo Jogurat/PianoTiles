@@ -12,7 +12,8 @@ private:
 	void print(std::ostream &os)const override;
 public:
 	Note(Duration d, std::string name, int midiVal);
-	Note(const Note &n);
+	Note(Duration d, std::string name, int midiVal, int id);
+	//Note(const Note &n);
 	~Note();
 
 	int getMidi()const override;
@@ -21,6 +22,7 @@ public:
 	int getOctave() const override;
 	void changeOctave(int i) override;
 	std::string getName()const override;
+	//Note splitNote();
 };
 #endif
 

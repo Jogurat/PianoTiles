@@ -16,8 +16,10 @@ public:
 	MusicSymbol(Duration d, int id) : _duration(d), _id(id) {};
 	virtual ~MusicSymbol() = 0;
 	Duration getDuration() const;
+	void setDuration(Duration d);
 	void split();
 	int getId() const;
+	bool isSplit()const;
 	friend std::ostream& operator<<(std::ostream &os, MusicSymbol *ms);
 	virtual int getMidi()const { return 0; };
 	virtual bool isNote()const = 0;

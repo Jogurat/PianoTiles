@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include "helperfuns.h"
 #include "Duration.h"
@@ -6,6 +5,9 @@
 #include "Note.h"
 #include "Part.h"
 #include "Composition.h"
+#include "Formatter.h"
+#include "MIDIFormatter.h"
+
 int main(int argc, char *argv[]) {
 
 	std::string filePath = argv[1];
@@ -14,18 +16,19 @@ int main(int argc, char *argv[]) {
 	noteMap = createInputMap(filePath); //f-ja iz helperfuns.h
 	Duration d1(1, 2);
 	Duration d2(1, 4);
-	Duration d3;
-	Note n(d1, "C#4", 30);
-	Note m(d1, "C1", 32);
-	Note k(d2, "D2", 25);
-	Note p(d1, "D#3", 33);
-
+	Duration d3(3, 4);
+	
 	Measure takt(d1);
 	Measure takt2(d1);
 	Part p1;
 	Composition::setNoteMap(&noteMap);
-	Composition c1(d1);
-	c1.readInputFile("test.txt");
+	Composition c1(d3);
+	c1.readInputFile("spring.txt");
+	//c1.readInputFile("test2.txt");
+	MIDIFormatter midi;
+
+	midi.makeFormat(c1, "spring");
+	//midi.makeFormat(c1, "test2");
 	/*takt.addSymbol(&n);
 	takt.addSymbol(&m);
 	takt2.addSymbol(&k);

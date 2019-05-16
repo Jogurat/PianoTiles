@@ -65,6 +65,11 @@ bool operator==(Duration d1, Duration d2)
 	return (d3._numerator == 0);
 }
 
+bool operator!=(Duration d1, Duration d2)
+{
+	return !(d1==d2);
+}
+
 bool operator<(Duration d1, Duration d2)
 {
 	return (!(d1 > d2) && !(d1 == d2));

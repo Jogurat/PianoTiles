@@ -25,6 +25,26 @@ Note::Note(Duration d, std::string name, int midiVal):
 	}
 }
 
+Note::Note(Duration d, std::string name, int midiVal, int id):
+	MusicSymbol(d, id)
+{
+	_name = name;
+	_midiVal = midiVal;
+	if (name.length() == 3) {
+		_note = name[0];
+		_octave = atoi(&_name[2]);
+		_isHigh = true;
+	}
+	else if (name.length() == 2) {
+		_note = name[0];
+		_octave = atoi(&_name[1]);
+		_isHigh = false;
+	}
+	else {
+		//greska
+	}
+}
+
 
 Note::~Note()
 {
@@ -61,3 +81,4 @@ std::string Note::getName() const
 {
 	return _name;
 }
+

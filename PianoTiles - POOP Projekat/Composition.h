@@ -24,6 +24,8 @@ public:
 	void parseNoBrackets(std::regex rx, std::string lineToParse);
 	void addSymbol(MusicSymbol *m);
 	void addBothHands(MusicSymbol *m);
+	Part& getLeftPart();
+	Part& getRightPart();
 	static void setNoteMap(std::map<char, std::pair<std::string, int>> *notes) { noteMap = notes; }
 };
 #endif

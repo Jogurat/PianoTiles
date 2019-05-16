@@ -7,6 +7,7 @@ private:
 	void print(std::ostream &os)const override;
 public:
 	Pause(Duration d) : MusicSymbol(d) {};
+	Pause(Duration d, int id) : MusicSymbol(d, id) {};
 	Pause(const Pause &p) : MusicSymbol(p._duration, p._id) {};
 	~Pause();
 	bool isNote() const override;

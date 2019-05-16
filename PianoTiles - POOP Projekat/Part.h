@@ -10,6 +10,8 @@ public:
 	Part();
 	Part(Duration d);
 	~Part();
+	std::list<Measure*>::iterator begin() { return _measureList.begin(); }
+	std::list<Measure*>::iterator end() { return _measureList.end(); }
 	void setDuration(Duration d);
 	void addSymbol(MusicSymbol *m);
 	void addMeasure(Measure &m);

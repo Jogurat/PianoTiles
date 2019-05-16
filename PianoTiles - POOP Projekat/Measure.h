@@ -16,10 +16,15 @@ public:
 	
 	};
 	~Measure();
+	Duration getMaxDuration();
+	Duration getCurrDuration();
 	MusicSymbol& peekFirst()const;
 	void addSymbol(MusicSymbol *s);
+	void addSymbolNoDuration(MusicSymbol *s);
 	void goThrough();
 	bool isFull();
+	std::list<MusicSymbol*>::iterator begin();
+	std::list<MusicSymbol*>::iterator end();
 	friend std::ostream& operator<<(std::ostream &os, Measure &m);
 };
 #endif

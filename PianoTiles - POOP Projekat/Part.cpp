@@ -25,7 +25,17 @@ void Part::addSymbol(MusicSymbol * m)
 {
 	if (_measureList.size() == 0 || _measureList.back()->isFull())
 		_measureList.push_back(new Measure(_duration));
-	_measureList.back()->addSymbol(m);
+
+	if (_measureList.back()->getCurrDuration() + m->getDuration() > _measureList.back()->getMaxDuration()) { //splitovanje znaka
+		m->split();
+		_measureList.back()->addSymbol(m);
+		_measureList.push_back(new Measure(_duration));
+		_measureList.back()->addSymbol(m);
+	}
+	else {
+		_measureList.back()->addSymbol(m);
+	}
+	
 }
 
 void Part::addMeasure(Measure & m)
