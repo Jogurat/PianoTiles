@@ -9,7 +9,7 @@
 int main(int argc, char *argv[]) {
 
 	std::string filePath = argv[1];
-	std::map<std::string, std::pair<std::string, int>> noteMap; //mapa sa stringom (karakter koji predstavlja notu), 
+	std::map<char, std::pair<std::string, int>> noteMap; //mapa sa stringom (karakter koji predstavlja notu), 
 																//i par -> string (sama nota), int (midi vrednost), iz map.csv
 	noteMap = createInputMap(filePath); //f-ja iz helperfuns.h
 	Duration d1(1, 2);
@@ -23,10 +23,9 @@ int main(int argc, char *argv[]) {
 	Measure takt(d1);
 	Measure takt2(d1);
 	Part p1;
+	Composition::setNoteMap(&noteMap);
 	Composition c1(d1);
-
-	c1.addSymbol(&n);
-	c1.addSymbol(&k);
+	c1.readInputFile("test.txt");
 	/*takt.addSymbol(&n);
 	takt.addSymbol(&m);
 	takt2.addSymbol(&k);

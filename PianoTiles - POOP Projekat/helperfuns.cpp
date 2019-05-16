@@ -1,17 +1,17 @@
 #include "helperfuns.h"
 
-std::map<std::string, std::pair<std::string, int>> createInputMap(std::string filePath) {
+std::map<char, std::pair<std::string, int>> createInputMap(std::string filePath) {
 
 	std::string line;
 	std::ifstream inputMap;
 	std::regex lineRegex("([^,]*),([^,]*),([^,]*)");
 	inputMap.open(filePath); //otvaranje map.csv
-	std::map<std::string, std::pair<std::string, int>> noteMap;
+	std::map<char, std::pair<std::string, int>> noteMap;
 
 	while (getline(inputMap, line)) {
 		std::smatch result;
 		if (regex_match(line, result, lineRegex)) {
-			std::string inputChar = result.str(1);
+			char inputChar = result.str(1)[0];
 			std::pair<std::string, int> inputPair;
 			inputPair.first = result.str(2);
 			inputPair.second = atoi(result.str(3).c_str());

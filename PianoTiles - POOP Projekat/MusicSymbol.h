@@ -19,10 +19,10 @@ public:
 	void split();
 	int getId() const;
 	friend std::ostream& operator<<(std::ostream &os, MusicSymbol *ms);
-	virtual int getMidi()const = 0;
+	virtual int getMidi()const { return 0; };
 	virtual bool isNote()const = 0;
 	virtual void editNote() {};
-	virtual int getOctave() const{};
+	virtual int getOctave() const { return 0; };
 	virtual void changeOctave(int i) {};
 	virtual std::string getName()const = 0;
 
